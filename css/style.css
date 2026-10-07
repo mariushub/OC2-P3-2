@@ -337,6 +337,37 @@ a.info {
     border: 1px solid var(--backgroundColor);
 }
 
+/* Page de monitoring */
+
+.monitoring {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.monitoring th,
+.monitoring td {
+    padding: 15px 20px;
+    text-align: left;
+    border: 1px solid var(--backgroundColor);
+}
+
+.monitoring thead {
+    color: white;
+    background-color: var(--commentColor);
+}
+
+.monitoring tbody tr {
+    background-color: var(--headerPaleColor);
+}
+
+.monitoring tbody tr:nth-child(even) {
+    background-color: white;
+}
+
+.monitoring .number {
+    text-align: center;
+}
+
 /** 
  * Footer global de la page.
  */

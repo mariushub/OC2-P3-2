@@ -9,6 +9,7 @@
     private int $idUser;
     private string $title = "";
     private string $content = "";
+    private int $nbComments = 0;
     private int $views = 0;
     private ?DateTime $dateCreation = null;
     private ?DateTime $dateUpdate = null;  
@@ -96,6 +97,25 @@
     public function getViews() : int 
     {
         return $this->views;
+    }
+
+    /**
+     * Setter pour le nombre de commentaires.
+     * Ce n'est pas une colonne de la table article : cette valeur est calculée par la requête SQL (COUNT).
+     * @param int $nbComments
+     */
+    public function setNbComments(int $nbComments) : void 
+    {
+        $this->nbComments = $nbComments;
+    }
+
+    /**
+     * Getter pour le nombre de commentaires.
+     * @return int
+     */
+    public function getNbComments() : int 
+    {
+        return $this->nbComments;
     }
 
     /**

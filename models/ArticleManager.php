@@ -103,4 +103,24 @@ class ArticleManager extends AbstractEntityManager
         $sql = "UPDATE article SET views = views + 1 WHERE id = :id";
         $this->db->query($sql, ['id' => $id]);
     }
+
+    /**
+     * Récupère tous les articles avec leur nombre de commentaires,
+     * pour la page de monitoring.
+     * @return array : un tableau d'objets Article.
+     */
+    public function getArticlesForMonitoring() : array
+    {
+        $sql = "SELECT article.*, COUNT(comment.id) AS nb_comments
+                FROM article
+                LEFT JOIN comment ON comment.id_article = article.id
+                GROUP BY article.id";
+        $result = $this->db->query($sql);
+        $articles = [];
+
+        while ($article = $result->fetch()) {
+            $articles[] = new Article($article);
+        }
+        return $articles;
+    }
 }
