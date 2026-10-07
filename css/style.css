@@ -283,6 +283,16 @@ a.info {
     margin: 5px 0 5px 0;
 }
 
+.comments .detailComment {
+    flex-grow: 1; /* Le commentaire prend toute la place disponible... */
+}
+
+.comments .deleteComment {
+    flex-shrink: 0; /* ... et le bouton garde sa taille, aligné à droite. */
+    align-self: center;
+    margin-left: 20px;
+}
+
 /* Page d'erreur */
 
 .error {
