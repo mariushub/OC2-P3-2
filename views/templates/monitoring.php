@@ -2,7 +2,16 @@
     /** 
      * Page de monitoring : affiche pour chaque article son nombre de vues,
      * son nombre de commentaires et sa date de publication.
+     * Le tableau peut être trié en cliquant sur l'en-tête d'une colonne.
      */
+
+    // Colonnes du tableau : critère de tri => libellé affiché.
+    $columns = [
+        'title' => 'Titre',
+        'views' => 'Vues',
+        'comments' => 'Commentaires',
+        'date' => 'Date de publication'
+    ];
 ?>
 
 <h2>Monitoring des articles</h2>
@@ -10,10 +19,26 @@
 <table class="monitoring">
     <thead>
         <tr>
-            <th>Titre</th>
-            <th>Vues</th>
-            <th>Commentaires</th>
-            <th>Date de publication</th>
+            <?php foreach ($columns as $column => $label) {
+                $isSorted = ($column === $sort);
+
+                // Un clic sur la colonne déjà triée en croissant la trie en décroissant.
+                // Un clic sur une autre colonne la trie en croissant.
+                $nextOrder = ($isSorted && $order === 'asc') ? 'desc' : 'asc';
+
+                // Flèche : ▲ croissant, ▼ décroissant, ⇅ colonne triable mais pas triée.
+                if ($isSorted) {
+                    $arrow = $order === 'asc' ? '▲' : '▼';
+                } else {
+                    $arrow = '⇅';
+                }
+            ?>
+                <th>
+                    <a href="index.php?action=monitoring&sort=<?= $column ?>&order=<?= $nextOrder ?>" class="<?= $isSorted ? 'sorted' : '' ?>" title="Trier par <?= strtolower($label) ?>">
+                        <?= $label ?> <span class="arrow"><?= $arrow ?></span>
+                    </a>
+                </th>
+            <?php } ?>
         </tr>
     </thead>
     <tbody>

@@ -368,6 +368,24 @@ a.info {
     text-align: center;
 }
 
+.monitoring th a {
+    display: block; /* Le lien prend toute la largeur de la cellule : plus facile à cliquer. */
+}
+
+.monitoring th a:hover {
+    text-decoration: underline;
+}
+
+.monitoring .arrow {
+    margin-left: 5px;
+    opacity: 0.5; /* Flèche discrète sur les colonnes non triées... */
+}
+
+.monitoring .sorted .arrow {
+    opacity: 1; /* ... et bien visible sur la colonne triée. */
+}
+
+
 /** 
  * Footer global de la page.
  */

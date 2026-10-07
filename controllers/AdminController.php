@@ -34,14 +34,24 @@ class AdminController {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
 
-        // On récupère les articles avec leur nombre de commentaires.
+        // On récupère le critère et l'ordre de tri demandés dans l'URL.
+        // Si les valeurs sont absentes ou inconnues, on trie par date, de la plus récente à la plus ancienne.
+        $sort = Utils::request("sort", "date");
+        if (!in_array($sort, ['title', 'views', 'comments', 'date'])) {
+            $sort = "date";
+        }
+        $order = Utils::request("order") === "asc" ? "asc" : "desc";
+
+        // On récupère les articles triés, avec leur nombre de commentaires.
         $articleManager = new ArticleManager();
-        $articles = $articleManager->getArticlesForMonitoring();
+        $articles = $articleManager->getArticlesForMonitoring($sort, $order);
 
         // On affiche la page de monitoring.
         $view = new View("Monitoring");
         $view->render("monitoring", [
-            'articles' => $articles
+            'articles' => $articles,
+            'sort' => $sort,
+            'order' => $order
         ]);
     }
 
