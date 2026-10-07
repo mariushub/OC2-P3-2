@@ -2,13 +2,14 @@
 
 /**
  * Entité Article, un article est défini par les champs
- * id, id_user, title, content, date_creation, date_update
+ * id, id_user, title, content, views, date_creation, date_update
  */
  class Article extends AbstractEntity 
  {
     private int $idUser;
     private string $title = "";
     private string $content = "";
+    private int $views = 0;
     private ?DateTime $dateCreation = null;
     private ?DateTime $dateUpdate = null;  
 
@@ -77,6 +78,24 @@
             return $content;
         }
         return $this->content;
+    }
+
+    /**
+     * Setter pour le nombre de vues.
+     * @param int $views
+     */
+    public function setViews(int $views) : void 
+    {
+        $this->views = $views;
+    }
+
+    /**
+     * Getter pour le nombre de vues.
+     * @return int
+     */
+    public function getViews() : int 
+    {
+        return $this->views;
     }
 
     /**
